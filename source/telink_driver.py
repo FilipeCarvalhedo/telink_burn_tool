@@ -424,13 +424,13 @@ def erase_adr(adr = 0):
 
 
 def erase():
-    if erase_init():
-        print("TC32 EVK : Swire OK")
+    # if erase_init():
+    #     print("TC32 EVK : Swire OK")
 
-    for i in range(0,2048,16):
-        erase_adr(adr = i)
-        hex_value = hex(i * 0x100)
-        print("Flash Sector (4K) Erase at address: " + str(hex_value))
+    # for i in range(0,2048,16):
+    #     erase_adr(adr = i)
+    #     hex_value = hex(i * 0x100)
+    #     print("Flash Sector (4K) Erase at address: " + str(hex_value))
 
     return True
 
@@ -569,7 +569,8 @@ def download_end():
     result = (receive(wValue = 0xa000, data_or_wLength = 20, timeOut = 0))
     # print("".join("%02x" % i for i in result))
 
-    print("Download Finish")
+    # print("Download Finish")
+    return True
 
 def donwload_adr(data, adr):
 
@@ -674,7 +675,7 @@ def donwload_adr(data, adr):
     result = (receive(wValue = 0xa000, data_or_wLength = 20, timeOut = 0))
     # print("".join("%02x" % i for i in result))
 
-    print("".join("Download: 0x%02x" % int(adr*256)))
+    # print("".join("Flash Page Program at address %02x" % int(adr*256)))
 
     return True
 
@@ -772,7 +773,7 @@ def download_block_init(adr):
     # print("".join("%02x" % i for i in result))
 
     # print("Erase: " + str(int(adr*16)))
-    print("".join("Erase: 0x%02x" % int(adr*256)))
+    # print("".join("Flash Sector (4K) Erase at address %02x" % int(adr*256)))
 
     return True
     
