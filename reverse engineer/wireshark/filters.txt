@@ -1,0 +1,7 @@
+
+Filter Wireshark:
+(usb.device_address == 24) && usb.bus_id == 3 && (usb.data_fragment || usb.control.Response  != f7:ff:18:08)
+
+
+Filter take just util data from packages, use after export json file from wireshark:
+cat file.json | grep 'usb.control.Response\|usb.data_fragment' | tr -d ' ' | sed -e 's/usb.data_fragment/send/g' | sed -e 's/usb.control.Response/recv/g' | sed -e 's/:/ /g' -e 's/ /=/1'

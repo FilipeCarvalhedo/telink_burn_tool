@@ -1,0 +1,6 @@
+Filter used:
+
+(usb.device_address == 24) && usb.bus_id == 3 && (usb.data_fragment || usb.control.Response  != f7:ff:18:08)
+
+
+https://wiki.wireshark.org/CaptureSetup/USB
