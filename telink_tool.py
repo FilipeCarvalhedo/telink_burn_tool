@@ -3,7 +3,7 @@ import time
 import array as ar
 import os
 
-import telink_driver as td
+import source.telink_driver as td
 
 td.driver_init()
 
