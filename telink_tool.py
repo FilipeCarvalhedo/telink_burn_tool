@@ -49,7 +49,7 @@ if args.erase:
         firmware_addr = i
 
         percent = (int)(firmware_addr *100 / (firmware_size - 16))
-        sys.stdout.write("\r" + str(percent) + "% [\033[3;91m{0}\033[0m{1}]".format("#"*(int)(percent*bar_len/100),"="*(bar_len-(int)(percent*bar_len/100)))+"".join("0x%04x" % int(firmware_addr/16)))
+        sys.stdout.write("\r" + str(percent) + "% [\033[3;91m{0}\033[0m{1}]".format("#"*(int)(percent*bar_len/100),"="*(bar_len-(int)(percent*bar_len/100)))+"".join("0x%05x" % int(firmware_addr*256)))
         sys.stdout.flush()
     print("")
 
@@ -85,7 +85,7 @@ def burn(args):
         firmware_addr += len(data)
 
         percent = (int)(firmware_addr *100 / firmware_size)
-        sys.stdout.write("\r" + str(percent) + "% [\033[3;32m{0}\033[0m{1}]".format("#"*(int)(percent*bar_len/100),"="*(bar_len-(int)(percent*bar_len/100)))+"".join("0x%04x" % int(firmware_addr/16)))
+        sys.stdout.write("\r" + str(percent) + "% [\033[3;32m{0}\033[0m{1}]".format("#"*(int)(percent*bar_len/100),"="*(bar_len-(int)(percent*bar_len/100)))+"".join("0x%05x" % int(firmware_addr)))
         sys.stdout.flush()
 
     td.download_end()
