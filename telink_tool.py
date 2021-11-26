@@ -6,7 +6,7 @@ import os
 import source.telink_driver as td
 import argparse
 
-__version__ = "0.2 dev"
+__version__ = "0.3 dev"
 
 print("")
 print("BDT Software Tool " + __version__)
@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser(description='Telink_Tools_BDT.py v%s - Telink B
 
 parser.add_argument("-a", "--activate", action="count", default=0)
 parser.add_argument("-e", "--erase", action="count", default=0)
+parser.add_argument("-r", "--reset", action="count", default=0)
 
 parser.add_argument("-f", "--flash", help='Download an image to Flash, ex: -f filename')
 # parser.add_argument('filename', help='Firmware image')
@@ -30,6 +31,11 @@ if args.activate:
     print("Activating: ")
     if(td.activate() == True):
         print('\033[32m', "Activate OK!", '\033[0m', sep='')
+
+if args.reset:
+    print("Activating: ")
+    if(td.reset() == True):
+        print('\033[32m', "Reset OK!", '\033[0m', sep='')
 
 if args.erase:
 

@@ -123,6 +123,29 @@ def activate():
 
     return True
 
+def reset():
+    # "send"="02 9f ff 50 50 50 50 50 50"
+    # "send"="02 a0 00 20 20 20 20 20 20"
+    # "send"="02 9f f8 6f 6f 6f 6f 6f 6f 00 00 00 01 00 00 41"
+    # "recv"="01 00 00 00 7c 1a 00 00 6f 00 00 00 00 00 00 00"
+
+    msg1  = bytearray.fromhex("02 9f ff 50 50 50 50 50 50")
+    send(wValue = 0x9fff, data_or_wLength = msg1)
+
+    ################
+
+    msg1  = bytearray.fromhex("02 a0 00 20 20 20 20 20 20")
+    msg2  = bytearray.fromhex("02 9f f8 6f 6f 6f 6f 6f 6f 00 00 00 01 00 00 41")
+
+    send(wValue = 0xa000, data_or_wLength = msg1)
+    send(wValue = 0x9ff8, data_or_wLength = msg2)
+    result = (receive(wValue = 0x9ff0, data_or_wLength = 24, timeOut = 5, reset = True, test_index = 0, test_data = 0x01))
+    # print("".join("%02x" % i for i in result))
+
+    ###############
+
+    return True
+
 def erase_init():
 
     time.sleep(0.010)
