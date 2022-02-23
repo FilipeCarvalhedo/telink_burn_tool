@@ -12,7 +12,9 @@ def driver_init():
     dev = usb.core.find(idVendor=0x248a, idProduct=0x5320)
     # was it found?
     if dev is None:
-        raise ValueError('Device not found')
+        dev = usb.core.find(idVendor=0x248a, idProduct=0x8266)
+        if dev is None:
+            raise ValueError('Device not found')
     # get an endpoint instance
     cfg = dev[0]
     intf = cfg[(0,0)]
