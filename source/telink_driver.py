@@ -4,19 +4,27 @@ import sys
 import time
 import array as ar
 
+def driver_find():
+     # find our device
+    global devices
+    devices = tuple(usb.core.find(find_all=True, idVendor=0x248a, idProduct=0x5320))
+    devices += tuple(usb.core.find(find_all=True, idVendor=0x248a, idProduct=0x8266))
+    return devices
 
-def driver_init():
+def driver_init(device = 0):
 
-    # find our device
-    global dev
-    dev = usb.core.find(idVendor=0x248a, idProduct=0x5320)
-    # was it found?
-    if dev is None:
-        dev = usb.core.find(idVendor=0x248a, idProduct=0x8266)
-        if dev is None:
-            raise ValueError('Device not found')
     # get an endpoint instance
+    global dev
+
+    dev = driver_find()
+    if not dev:
+        raise ValueError('Device not found') 
+
+    dev = dev[int(device)]
+
     cfg = dev[0]
+    # print(driver_find()[2])
+
     intf = cfg[(0,0)]
 
     try:
