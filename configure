@@ -1,1 +1,1 @@
-sudo pip install pyusb
+sudo pip3 install pyusb
